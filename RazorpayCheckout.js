@@ -1,8 +1,8 @@
 'use strict';
 
-import { NativeModules, NativeEventEmitter } from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
-const razorpayEvents = new NativeEventEmitter(NativeModules.RazorpayEventEmitter);
+const razorpayEvents = Platform.OS === 'ios' ? null : new NativeEventEmitter(NativeModules.RazorpayEventEmitter);
 
 const removeSubscriptions = () => {
   razorpayEvents.removeAllListeners('Razorpay::PAYMENT_SUCCESS');
